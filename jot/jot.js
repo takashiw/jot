@@ -66,12 +66,15 @@ window.onload = function(){
 		} else {
 			var exp = /\[(.*?)\]\((.*?)\)/;
 			if(exp.test(storage[i])){
-				console.log("Holy crap");
-				// var element = document.createElement('a');
-				// element.setAttribute("href","http://www.example.com");
-				// element.appendChild(storage[i])
+				var match = storage[i].match(/\[([^<]+)\]\(([^<]+)\)/)
+				console.log(match);
+				var element = document.createElement('a');
+				element.setAttribute("href",match[2]);
+				element.appendChild(document.createTextNode(match[1]));
+				txt.appendChild(element);
+			} else {
+				txt.appendChild(document.createTextNode(storage[i]));
 			}
-			txt.appendChild(document.createTextNode(storage[i]));
 			console.log(txt);
 			// console.log(storage)
 		}
